@@ -1,0 +1,103 @@
+:root {
+  --hue: 160;                
+  --sat: 70%;
+  --text-light: hsl(0 0% 10%);
+  --text-dark: hsl(0 0% 90%);
+  --bg-light: hsl(0 0% 98%);
+  --bg-dark:  hsl(0 0% 8%);
+  --accent-light: hsl(var(--hue) var(--sat) 40%);
+  --accent-dark:  hsl(var(--hue) var(--sat) 60%);
+  --tr: 0.4s ease;
+}
+
+body {
+  font-family: system-ui, sans-serif;
+  background: var(--bg-light);
+  color: var(--text-light);
+  transition: background var(--tr), color var(--tr);
+}
+
+body.dark {
+  background: var(--bg-dark);
+  color: var(--text-dark);
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+}
+
+h1 {
+  margin: 0;
+  font-size: 1.6rem;
+  color: var(--accent-light);
+  transition: color var(--tr);
+}
+
+body.dark h1 {
+  color: var(--accent-dark);
+}
+
+#themeToggle {
+  width: 3rem;
+  aspect-ratio: 1;
+  border: none;
+  border-radius: 50%;
+  background: var(--accent-light);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: background var(--tr), transform 0.3s ease;
+}
+
+body.dark #themeToggle {
+  background: var(--accent-dark);
+  transform: rotate(180deg);
+}
+
+.icon,
+.icon::before,
+.icon::after {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 1.2rem;
+  height: 1.2rem;
+  border-radius: 50%;
+  transition: transform var(--tr), box-shadow var(--tr), opacity var(--tr);
+}
+
+.icon::before {
+  content: "";
+  box-shadow:
+    0 -1.6rem 0 -1rem currentColor,
+    0  1.6rem 0 -1rem currentColor,
+    1.6rem 0  0 -1rem currentColor,
+   -1.6rem 0  0 -1rem currentColor,
+    1.2rem 1.2rem 0 -1rem currentColor,
+   -1.2rem 1.2rem 0 -1rem currentColor,
+    1.2rem -1.2rem 0 -1rem currentColor,
+   -1.2rem -1.2rem 0 -1rem currentColor;
+}
+
+body.dark .icon::before {
+  opacity: 0;               
+}
+
+.icon::after {
+  content: "";
+  background: var(--bg-dark);
+  transform: translateX(0.4rem);
+  opacity: 0;
+}
+
+body.dark .icon::after {
+  opacity: 1;
+}
+
+
+#themeToggle:active { scale: 0.9; }
+a { color: var(--accent-light); }
+body.dark a { color: var(--accent-dark); }
